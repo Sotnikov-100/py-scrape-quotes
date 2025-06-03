@@ -22,7 +22,7 @@ def get_page_content(url: str) -> BeautifulSoup:
         return None
 
 
-def parser_quotes_from_page(soup: BeautifulSoup) -> list[Quote]:
+def parse_quotes_from_page(soup: BeautifulSoup) -> list[Quote]:
     quotes = []
     for quote_div in soup.find_all("div", class_="quote"):
         text = quote_div.find("span", class_="text").get_text(strip=True)
@@ -50,7 +50,7 @@ def scrape_all_quotes(base_url: str) -> list[Quote]:
         if not soup:
             break
 
-        all_quotes.extend(parser_quotes_from_page(soup))
+        all_quotes.extend(parse_quotes_from_page(soup))
 
         current_url = get_next_page_url(soup, base_url)
 
